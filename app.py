@@ -30,9 +30,9 @@ def after_request(response):
 
 
 CORS(animal, origins=['http://localhost:3000'], supports_credentials=True) # adding this line
-app.register_blueprint(animal, url_prefix='/api/v1/shelters')
+app.register_blueprint(animal, url_prefix='/api/v1/animals')
 CORS(shelter, origins=['http://localhost:3000'], supports_credentials=True) # adding this line
-app.register_blueprint(shelter, url_prefix='/api/v1/animals')
+app.register_blueprint(shelter, url_prefix='/api/v1/shelters')
 
 
 if __name__ == '__main__':
