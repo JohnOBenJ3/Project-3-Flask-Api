@@ -56,3 +56,21 @@ def initialize(): #just a method. can be named anything but if initialize makes 
     DATABASE.create_tables([Shelter, Animal, Admin], safe=True) #make sure the table is created. DON'T ERASE!!!!!<-- <--
     print("TABLES Created")
     DATABASE.close() #after it works, close the connection so there are not threats to an open database
+
+    # {
+    #     "address":
+    #     "city":
+    #     "name":
+    #     "shelter_id":
+    #     "phone":
+    # }
+
+    # {
+    #     "name":
+    #     "shelter":
+    #     "breed":
+    #     "age":
+    #     "gender":
+    #     "photo":
+    #     "description":
+    # }
