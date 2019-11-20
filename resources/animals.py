@@ -22,3 +22,9 @@ def add_animal():
     animal_dict = model_to_dict(animal)
     return jsonify(data = animal_dict, status = {"code": 200, "msg": "OK"})
 
+@animal.route('/<id>', methods=["DELETE"])
+def adopt_animal(id):
+    query = models.Animal.delete().where(models.Animal.id == id)
+    query.execute()
+    return jsonify(data = "Animal was adopted!!", status = {"code": 200, "msg": "OK"})
+
