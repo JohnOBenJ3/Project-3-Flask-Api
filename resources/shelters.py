@@ -7,6 +7,7 @@ from playhouse.shortcuts import model_to_dict
 shelter = Blueprint('shelters', 'shelter')
 
 
+# index route for all of the shelters
 @shelter.route('/', methods=['GET'])
 def get_all_shelters():
     # return "Hello World"
@@ -17,6 +18,7 @@ def get_all_shelters():
     except models.DoesNotExist:
         return jsonify(data = {}, status = {"code": 401, "msg": "Unauthorized"})
 
+# post/create route for making a new shelter
 @shelter.route('/', methods=["POST"])
 def create_shelter():
     # we want to get back the json object for manipulation from the db
@@ -30,6 +32,7 @@ def create_shelter():
     # being the newly created instance
     return jsonify(data = shelter_dict, status = {"code": 200, "msg": "OK"})
 
+# show route for a selected shelter
 @shelter.route('/<id>', methods=["GET"])
 def show_one_shelter(id):
     #does the id match what i think it should match?
@@ -37,6 +40,7 @@ def show_one_shelter(id):
     shelter = models.Shelter.get_by_id(id)
     return jsonify(data = model_to_dict(shelter), status = {"code": 200, "msg": "OK"})
 
+# edit/put route for a shelter selected by id
 @shelter.route('/<id>', methods=["PUT"])
 def change_shelter_specs(id):
     payload = request.get_json()
@@ -47,6 +51,7 @@ def change_shelter_specs(id):
     shelter_dict = model_to_dict(shelter)
     return jsonify(data = shelter_dict, status = {"code": 200, "msg": "OK"})
 
+# delete route to remove a shelter by id
 @shelter.route('/<id>', methods=["DELETE"])
 def remove_shelter(id):
     # making sure that the id of the thing I get back is the same as the id in the url
