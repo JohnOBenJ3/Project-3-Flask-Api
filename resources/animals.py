@@ -28,3 +28,8 @@ def adopt_animal(id):
     query.execute()
     return jsonify(data = "Animal was adopted!!", status = {"code": 200, "msg": "OK"})
 
+@animal.route('/<id>', methods=["GET"])
+def display_one_animal(id):
+    animal = models.Animal.get_by_id(id)
+    return jsonify(data = model_to_dict(animal), status = {"code": 200, "msg": "OK"})
+
