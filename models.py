@@ -32,7 +32,7 @@ class Shelter(Model):
 class Animal(Model):
     id = PrimaryKeyField(null=False)
     name = CharField()
-    shelter_id = ForeignKeyField(Shelter, related_name='shelters')
+    shelter = ForeignKeyField(Shelter, backref='animals_specs')
     breed = CharField()
     age = CharField()
     gender = CharField()
