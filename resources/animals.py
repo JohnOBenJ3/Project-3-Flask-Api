@@ -21,6 +21,10 @@ def get_all_animals():
 @animal.route('/', methods=["POST"])
 def add_animal():
     payload = request.get_json()
+    if (payload['shelter']):
+        payload['shelter'] == models.Shelter.get(id=payload['shelter'])
+    else: 
+        payload['shelter'] == 1
     animal = models.Animal.create(**payload)
     print(animal.__dict__)
     animal_dict = model_to_dict(animal)
