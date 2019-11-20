@@ -7,6 +7,7 @@ from playhouse.shortcuts import model_to_dict
 animal = Blueprint('animals', 'animal')
 
 
+# index route for all of the animals
 @animal.route('/', methods=['GET'])
 def get_all_animals():
     # return "Hello World"
@@ -14,6 +15,7 @@ def get_all_animals():
     print(animals)
     return jsonify(data = animals, status = {"code": 200, "msg": "OK"})
 
+# animal create/post route
 @animal.route('/', methods=["POST"])
 def add_animal():
     payload = request.get_json()
@@ -22,17 +24,20 @@ def add_animal():
     animal_dict = model_to_dict(animal)
     return jsonify(data = animal_dict, status = {"code": 200, "msg": "OK"})
 
+# adoption/delete route for selected animal
 @animal.route('/<id>', methods=["DELETE"])
 def adopt_animal(id):
     query = models.Animal.delete().where(models.Animal.id == id)
     query.execute()
     return jsonify(data = "Animal was adopted!!", status = {"code": 200, "msg": "OK"})
 
+# show route for selected animal
 @animal.route('/<id>', methods=["GET"])
 def display_one_animal(id):
     animal = models.Animal.get_by_id(id)
     return jsonify(data = model_to_dict(animal), status = {"code": 200, "msg": "OK"})
 
+# animal edit route
 @animal.route('/<id>', methods=["PUT"])
 def update_animal(id):
     payload = request.get_json()
