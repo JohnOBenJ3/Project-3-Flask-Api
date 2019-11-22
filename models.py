@@ -22,7 +22,7 @@ else:
 
 
 class Shelter(Model):
-    id = PrimaryKeyField(null=False)
+    # id = PrimaryKeyField(null=False)
     address = CharField(null=True, default='')
     city = CharField(null=True, default='')
     name = CharField(null=True, default='')
@@ -35,9 +35,9 @@ class Shelter(Model):
 
 
 class Animal(Model):
-    id = PrimaryKeyField(null=False)
+    # id = PrimaryKeyField(null=False)
     name = CharField()
-    shelter = ForeignKeyField(Shelter, backref='shelter_specs')
+    shelter = ForeignKeyField(Shelter, backref='shelter_specs', null=True, default=1)
     breed = CharField()
     age = CharField()
     gender = CharField()
@@ -48,7 +48,7 @@ class Animal(Model):
         database = DATABASE
 
 class Admin(UserMixin, Model):
-    id = PrimaryKeyField(null=False)
+    # id = PrimaryKeyField(null=False)
     email = CharField(unique=True)
     password = CharField()
     class Meta:
@@ -60,6 +60,22 @@ def initialize(): #just a method. can be named anything but if initialize makes 
     DATABASE.connect() #connect to db
     DATABASE.create_tables([Shelter, Animal, Admin], safe=True) #make sure the table is created. DON'T ERASE!!!!!<-- <--
     print("TABLES Created")
+
+    if (Shelter.select().count() == 0):
+        created_shelter = Shelter.create(
+            name='Fake Shelter',
+            city='Denver'
+        )
+        Animal.create(
+            name='Otis',
+            shelter=created_shelter,
+            breed='horse',
+            age=1,
+            gender='Male',
+            photo='photo',
+            description='Good horse'
+        )
+
     DATABASE.close() #after it works, close the connection so there are not threats to an open database
 
     # {
