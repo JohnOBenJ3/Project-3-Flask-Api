@@ -4,6 +4,7 @@ from flask_login import LoginManager
 from flask_cors import CORS
 from resources.animals import animal
 from resources.shelters import shelter
+from resources.admin import admin
 
 
 DEBUG = True #better error message
@@ -33,6 +34,8 @@ CORS(animal, origins=['http://localhost:3000'], supports_credentials=True) # add
 app.register_blueprint(animal, url_prefix='/api/v1/animals')
 CORS(shelter, origins=['http://localhost:3000'], supports_credentials=True) # adding this line
 app.register_blueprint(shelter, url_prefix='/api/v1/shelters')
+CORS(shelter, origins=['http://localhost:3000'], supports_credentials=True) # adding this line
+app.register_blueprint(shelter, url_prefix='/api/v1/admins')
 
 
 if __name__ == '__main__':
