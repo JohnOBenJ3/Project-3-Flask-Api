@@ -43,7 +43,8 @@ class Animal(Model):
         database = DATABASE
 
 class Admin(UserMixin, Model):
-    id = PrimaryKeyField(null=False)
+    # id = PrimaryKeyField(null=False)
+    
     email = CharField(unique=True)
     password = CharField()
     class Meta:
