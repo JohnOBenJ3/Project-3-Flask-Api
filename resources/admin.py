@@ -6,7 +6,6 @@ from playhouse.shortcuts import model_to_dict
 
 admin = Blueprint('admins', 'admin')
 
-<<<<<<< HEAD
 @admin.route('/login', methods=["POST"])
 def admin_login():
     payload = request.get_json()
@@ -15,7 +14,3 @@ def admin_login():
     models.Admin.create(**payload)
     admin_dict = model_to_dict(admin)
     return jsonify(data = admin_dict, status = {"code": 200, "msg": "OK"})
-=======
-# @admin.route('/login', methods=["POST"])
-# def admin_login():
->>>>>>> master

@@ -61,7 +61,6 @@ def initialize(): #just a method. can be named anything but if initialize makes 
     DATABASE.create_tables([Shelter, Animal, Admin], safe=True) #make sure the table is created. DON'T ERASE!!!!!<-- <--
     print("TABLES Created")
 
-<<<<<<< HEAD
     # if (Shelter.select().count() == 0):
     #     created_shelter = Shelter.create(
     #         name='Fake Shelter',
@@ -76,22 +75,6 @@ def initialize(): #just a method. can be named anything but if initialize makes 
     #         photo='photo',
     #         description='Good horse'
     #     )
-=======
-    if (Shelter.select().count() == 0):
-        created_shelter = Shelter.create(
-            name='Fake Shelter',
-            city='Denver'
-        )
-        Animal.create(
-            name='Otis',
-            shelter=created_shelter,
-            breed='horse',
-            age=1,
-            gender='Male',
-            photo='photo',
-            description='Good horse'
-        )
->>>>>>> master
 
     DATABASE.close() #after it works, close the connection so there are not threats to an open database
 
