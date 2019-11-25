@@ -63,7 +63,7 @@ def initialize(): #just a method. can be named anything but if initialize makes 
     print("TABLES Created")
 
     if (Shelter.select().count() == 0):
-    created_shelter = Shelter.create(
+        created_shelter = Shelter.create(
             name='Aurora Animal Shelter',
             city='Denver',
             address="3985 S. Grant St.",
