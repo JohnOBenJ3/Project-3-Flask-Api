@@ -8,14 +8,22 @@ from resources.shelters import shelter
 from resources.admin import admin
 
 
-DEBUG = True #better error message
-PORT = 8000
+DEBUG = True #I don't want any errors but when I get them I want them to be better
+PORT = 8000 #localhost 8000
 
-# Initialize an instance of the Flask class.
-# This starts the website!
+# This initializes Flask
 app = Flask(__name__) # __name__ == "__main__"
 app.secret_key = 'asldn;alisdngl;asdnl;kadsnalksdnglkasdn'
 
+login_manager = LoginManager() #<-- apparently you need these parentheses
+login_manager.init_app(app)
+
+@login_manager.user_loader
+def load_user(adminid):
+  try: 
+    return models.Admin.get(models.Admin.id == adminid)
+  except models.DoesNotExist:
+    return None
 
 @app.before_request
 def before_request():

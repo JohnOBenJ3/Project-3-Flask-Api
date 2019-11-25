@@ -1,6 +1,9 @@
 import models
 
 from flask import Blueprint, jsonify, request
+from flask_bcrypt import generate_password_hash, check_password_hash
+from flask_login import login_user, current_user, logout_user
+
 
 from playhouse.shortcuts import model_to_dict
 
@@ -35,6 +38,7 @@ def add_animal():
 def adopt_animal(id):
     # if the id of the model matches the id in the url...
     query = models.Animal.delete().where(models.Animal.id == id)
+    #this method should only be accessible to an admin and only once they are logged in 
     # execute the delete method
     query.execute()
     return jsonify(data = "Animal was adopted!!", status = {"code": 200, "msg": "OK"})

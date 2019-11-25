@@ -6,11 +6,24 @@ from playhouse.shortcuts import model_to_dict
 
 admin = Blueprint('admins', 'admin')
 
-@admin.route('/login', methods=["POST"])
-def admin_login():
+@admin.route('/register', methods=["POST"])
+def admin_register():
     payload = request.get_json()
     payload['email'].lower()
     payload['password'] = generate_password_hash(payload['password'])
-    models.Admin.create(**payload)
+    admin = models.Admin.create(**payload)
     admin_dict = model_to_dict(admin)
     return jsonify(data = admin_dict, status = {"code": 200, "msg": "OK"})
+
+@admin.route('/login', methods=["POST"])
+def login_admin():
+    payload = request.get_json()
+    admin = models.Admin.get(models.Admin.email == payload['email'])
+    admin_dict = model_to_dict(admin)
+    if check_password_hash(admin_dict['password'], payload['password']):
+        login_user(admin)
+        del admin_dict['password']
+        return jsonify(data = admin_dict, status = {"code": 200, "msg": "OK"})
+    else:
+        return jsonify(data = {}, status= {"code": 401, "msg": "You are not authorized to do that"})
+    
