@@ -3,6 +3,7 @@ import models
 from flask import Blueprint, jsonify, request
 from flask_bcrypt import generate_password_hash, check_password_hash
 from flask_login import login_user, current_user, logout_user
+# import admin
 
 
 from playhouse.shortcuts import model_to_dict
@@ -38,10 +39,13 @@ def add_animal():
 def adopt_animal(id):
     # if the id of the model matches the id in the url...
     query = models.Animal.delete().where(models.Animal.id == id)
+    if current_user.is_authenticated:
     #this method should only be accessible to an admin and only once they are logged in 
     # execute the delete method
-    query.execute()
-    return jsonify(data = "Animal was adopted!!", status = {"code": 200, "msg": "OK"})
+        query.execute()
+        return jsonify(data = "Animal was adopted!!", status = {"code": 200, "msg": "OK"})
+    else:
+        return jsonify(data={}, status = {'code': 401, 'msg': "You are not authorized to do that"})
 
 # show route for selected animal
 @animal.route('/<id>', methods=["GET"])
@@ -59,7 +63,8 @@ def update_animal(id):
     else: 
         payload['shelter'] == 1
     query = models.Animal.update(**payload).where(models.Animal.id == id)
-    query.execute()
+    if current_user.is_authenticated:
+        query.execute()
     # again, this is referencing the id in the url
     animal = models.Animal.get_by_id(id)
     # need to turn this data into a jsonifiable format(dict)
