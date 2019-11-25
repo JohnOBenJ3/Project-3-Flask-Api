@@ -24,6 +24,10 @@ def load_user(adminid):
     return models.Admin.get(models.Admin.id == adminid)
   except models.DoesNotExist:
     return None
+  
+@login_manager.unauthorized_handler
+def unauthorized():
+  return jsonify(data={'ERROR'}, status={'code': 401,'message': "This is a restricted area."})
 
 @app.before_request
 def before_request():

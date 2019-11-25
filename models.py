@@ -2,8 +2,6 @@ import os ##NEW
 import datetime
 from peewee import *
 from flask_login import UserMixin
-from flask_admin import Admin
-from flask_admin.contrib.peewee import ModelView
 from playhouse.db_url import connect
 
 if 'ON_HEROKU' in os.environ:
@@ -49,24 +47,14 @@ class Animal(Model):
         database_table = 'animals'
         database = DATABASE
 
-# class Admin(UserMixin, Model):
-#     # id = PrimaryKeyField(null=False)
-#     email = CharField(unique=True)
-#     password = CharField()
-#     class Meta:
-#         database_table = 'admin'
-#         database = DATABASE
-class ShelterView(ModelView):
-    def __init__(self, session, **kwargs):
-        super(ShelterView, self).__init__(Shelter, session, **kwargs)
-        
-class AnimalView(ModelView):
-    def __init__(self, session, **kwargs):
-        super(AnimalView, self).__init__(Animal, session, **kwargs)
-        
-admin = admin.Admin(app)
-admin.add_view(ShelterView(Shelter))
-admin.add_view(AnimalView(Animal))
+class Admin(UserMixin, Model):
+    # id = PrimaryKeyField(null=False)
+    email = CharField(unique=True)
+    password = CharField()
+    class Meta:
+        database_table = 'admin'
+        database = DATABASE
+
     
 
 def initialize(): #just a method. can be named anything but if initialize makes sense, keep using it
