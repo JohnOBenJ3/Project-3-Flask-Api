@@ -62,20 +62,38 @@ def initialize(): #just a method. can be named anything but if initialize makes 
     DATABASE.create_tables([Shelter, Animal, Admin], safe=True) #make sure the table is created. DON'T ERASE!!!!!<-- <--
     print("TABLES Created")
 
-    # if (Shelter.select().count() == 0):
-    #     created_shelter = Shelter.create(
-    #         name='Fake Shelter',
-    #         city='Denver'
-    #     )
-    #     Animal.create(
-    #         name='Otis',
-    #         shelter=created_shelter,
-    #         breed='horse',
-    #         age=1,
-    #         gender='Male',
-    #         photo='photo',
-    #         description='Good horse'
-    #     )
+    if (Shelter.select().count() == 0):
+    created_shelter = Shelter.create(
+            name='Aurora Animal Shelter',
+            city='Denver',
+            address="3985 S. Grant St.",
+            phone="818-055-3121"
+
+        )
+        Shelter.create(
+             name='Doggie Days',
+            city='Denver',
+            address="3233 Middlesborough Blvd.",
+            phone="818-345-0199"
+        )
+        Shelter.create(
+             name='No Feline Left Behind',
+            city='Denver',
+            address="4242 Main St.",
+            phone="818-069-3125"
+        )
+        Shelter.create(
+             name='Animals For All',
+            city='Denver',
+            address="101 Main St.",
+            phone="818-217-8238"
+        )
+        Shelter.create(
+             name="Bennet's Birds",
+            city='Denver',
+            address="5965 Eagleway St.",
+            phone="867-5309"
+        )
 
     DATABASE.close() #after it works, close the connection so there are not threats to an open database
 
