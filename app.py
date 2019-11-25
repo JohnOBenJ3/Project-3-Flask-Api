@@ -49,7 +49,7 @@ CORS(animal, origins=['http://localhost:3000', 'https://cierrasreactapp.herokuap
 app.register_blueprint(animal, url_prefix='/api/v1/animals')
 CORS(shelter, origins=['http://localhost:3000', 'https://cierrasreactapp.herokuapp.com'], supports_credentials=True) # adding this line
 app.register_blueprint(shelter, url_prefix='/api/v1/shelters')
-CORS(admin, origins=['http://localhost:3000'], supports_credentials=True) # adding this line
+CORS(admin, origins=['http://localhost:3000',  'https://cierrasreactapp.herokuapp.com'], 'supports_credentials=True) # adding this line
 app.register_blueprint(admin, url_prefix='/api/v1/admins')
 
 if 'ON_HEROKU' in os.environ:
