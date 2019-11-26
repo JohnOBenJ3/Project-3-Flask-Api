@@ -43,7 +43,7 @@ def after_request(response):
     return response
 
 
-CORS(app, origins=['http://localhost:3000'], supports_credentials=True) # adding this line
+# CORS(app, origins=['http://localhost:3000'], supports_credentials=True) # adding this line
 CORS(animal, origins=['http://localhost:3000', 'https://cierrasreactapp.herokuapp.com'], supports_credentials=True) # adding this line
 
 app.register_blueprint(animal, url_prefix='/api/v1/animals')
