@@ -1,4 +1,5 @@
 from models import Shelter
+from models import Animal
 created_shelter = Shelter.create(
     name='Aurora Animal Shelter',
     city='Denver',
