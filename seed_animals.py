@@ -90,7 +90,7 @@ def seed_animals():
         description = "Let's play outside."
 
     )
-     Animal.create(
+    Animal.create(
         name = 'Chief',
         breed= 'Chocolate Lab',
         shelter= 2,
